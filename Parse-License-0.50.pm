@@ -1,6 +1,6 @@
 package License;
 
-our $VERSION="0.50";
+$VERSION="0.50";
 
 @track1fields=(
 'state',
@@ -55,17 +55,18 @@ sub haircolor
 	return $hc{$self->{haircolor}};
 }
 
-sub daysinmonth
+sub monthdays
 {
- my $year=shift;
- my $month=shift;
+ 	my $year=shift;
+ 	my $month=shift;
+ 
  if ($month==4 || $month==6 || $month==9 || $month==11)
  {
  	return 30;
  }
  if ($month==2)
  {
-  if  (($year / 4 )==int($year / 4))
+  if  (($year / 4 ) == int($year / 4))
   {
   	return 29;
   }
@@ -102,24 +103,24 @@ sub parse_magstripe
   	 $self->{$track3fields[$i]}=$results[$i];
  	}
 
- 	$self->{license}.=$self->{dlx};
- 	($self->{lname},$self->{fname},$self->{middle})=split(/\$/,$self->{name});
-	($self->{address1},$self->{address2})=split(/\$/,$self->{address});
+ 	$self->{'license'}.=$self->{'dlx'};
+ 	($self->{'lname'},$self->{'fname'},$self->{middle})=split(/\$/,$self->{'name'});
+	($self->{'address1'},$self->{'address2'})=split(/\$/,$self->'{address'});
 
-	$self->{birthdate}=$self->{birthyear}.'-'.sprintf('%02d',$self->{birthmonth}).'-'.$self->{birthday};
-	$exyear=2000+($self->{exyy}+1);
+	$self->{'birthdate'}=$self->{'birthyear'}.'-'.sprintf('%02d',$self->{'birthmonth'}).'-'.$self->{'birthday'};
+	$exyear=2000+($self->{'exyy'}+1);
 	
-	$dim = daysinmonth($exyear,$self->{bmm});
+	$dim = monthdays($exyear, $self->{'bmm'});
 	
-	if ($self-{exmm}==88)
+	if ($self->{'exmm'}==88)
 	{
-	  $self->{expdate}=sprintf('%4d',$exyear).'-'.$self->{bmm}.'-'.$dim;	 	 	
+	  $self->{'expdate'}=sprintf('%4d',$exyear).'-'.$self->{'bmm'}.'-'.$dim;	 	 	
 	}
 	else
 	{
-	  $self->{expdate}=sprintf('%4d',$self->{exyy}+2000).'-'.$self->{exmm}.'-'.$dim;	 	  
+	  $self->{'expdate'}=sprintf('%4d',$self->{'exyy'}+2000).'-'.$self->{'exmm'}.'-'.$dim;	 	  
 	}
-}
+} 
 
 sub country
 {
@@ -296,6 +297,7 @@ sub new {
         bless $self, $class;
         return $self;
 };
+
 1;
 
 =head1 DESCRIPTION
