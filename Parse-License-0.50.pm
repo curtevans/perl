@@ -126,7 +126,7 @@ sub country
 {
  my $self=shift;
  
- return $jids{$self->{id}};
+ return $jids{$self->{'id'}};
 }
 
 sub loadtrack
